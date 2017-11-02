@@ -1,0 +1,25 @@
+language: node_js
+cache:
+  yarn: true
+
+sudo: required
+
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - gcc-4.9
+      - g++-4.9
+      - libudev-dev
+
+env:
+  global:
+    - CC=gcc-4.9
+    - CXX=g++-4.9
+
+script:
+  - ./run.sh
+
+node_js:
+  - 7
