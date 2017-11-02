@@ -1,8 +1,17 @@
 language: node_js
 cache:
   yarn: true
+  directories:
+    - bin
 
 sudo: required
+
+services:
+  - docker
+
+before_install:
+  - ./create-rpxc.sh
+  - docker ps -a
 
 addons:
   apt:
@@ -19,7 +28,7 @@ env:
     - CXX=g++-4.9
 
 script:
-  - ./run.sh
+  - ./build-image.sh
 
 node_js:
   - 7
