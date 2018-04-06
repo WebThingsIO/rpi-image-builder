@@ -20,10 +20,11 @@ setvar RPXC               './bin/rpxc'
 setvar USE_CACHED_RPXC    0
 setvar USE_CACHED_BASE    1
 setvar GATEWAY_REPO       https://github.com/mozilla-iot/gateway
-setvar GATEWAY_BRANCH     0.2.2
+setvar GATEWAY_BRANCH     v0.4.0
 setvar OPENZWAVE_ZIP      https://github.com/OpenZWave/open-zwave/archive/master.zip
 setvar BASE_IMAGE_DIR     https://s3-us-west-1.amazonaws.com/mozillagatewayimages/base
-setvar BASE_IMAGE_NAME    gateway-base-0.2.2.img
+setvar BASE_IMAGE_NAME    gateway-base-0.4.0.img
 # The defaut image name is the base image name minus the -base portion
-setvar GATEWAY_IMAGE_NAME "${BASE_IMAGE_NAME/-base/}"
+#setvar GATEWAY_IMAGE_NAME "${BASE_IMAGE_NAME/-base/}"
+setvar GATEWAY_IMAGE_NAME  gateway-0.4.0-pre1.img
 echo "==================================================================================="

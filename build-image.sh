@@ -18,7 +18,7 @@ rm -rf OpenZWave/open-zwave
 rm -rf master.zip open-zwave-master
 wget ${OPENZWAVE_ZIP}
 
-unzip $(basename ${OPENZWAVE_ZIP})
+unzip -q $(basename ${OPENZWAVE_ZIP})
 mv open-zwave-master OpenZWave/open-zwave
 
 # Go build the gateway dependencies
