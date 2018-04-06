@@ -26,5 +26,5 @@ setvar BASE_IMAGE_DIR     https://s3-us-west-1.amazonaws.com/mozillagatewayimage
 setvar BASE_IMAGE_NAME    gateway-base-0.4.0.img
 # The defaut image name is the base image name minus the -base portion
 #setvar GATEWAY_IMAGE_NAME "${BASE_IMAGE_NAME/-base/}"
-setvar GATEWAY_IMAGE_NAME  gateway-0.4.0-pre1.img
+setvar GATEWAY_IMAGE_NAME  gateway-0.4.0-pre2.img
 echo "==================================================================================="
