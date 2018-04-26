@@ -16,10 +16,10 @@ mkdir -p OpenZWave
 rm -rf OpenZWave/open-zwave
 
 rm -rf master.zip open-zwave-master
-wget ${OPENZWAVE_ZIP}
+wget -O ozw.zip ${OPENZWAVE_ZIP}
 
-unzip -q $(basename ${OPENZWAVE_ZIP})
-mv open-zwave-master OpenZWave/open-zwave
+unzip -q ozw.zip
+mv open-zwave-$(basename ${OPENZWAVE_ZIP}) OpenZWave/open-zwave
 
 # Go build the gateway dependencies
 ${RPXC} bash -c ./gateway/image/build-gateway.sh
@@ -56,6 +56,7 @@ mkdir -p image
 FINAL_IMAGE_NAME="base/${BASE_IMAGE_NAME}-final.img"
 mv "${FINAL_IMAGE_NAME}" "${GATEWAY_IMAGE_NAME}"
 zip "image/${GATEWAY_IMAGE_NAME}.zip" "${GATEWAY_IMAGE_NAME}"
+rm -f "${GATEWAY_IMAGE_NAME}"
 (cd image; sha256sum "${GATEWAY_IMAGE_NAME}.zip" > "${GATEWAY_IMAGE_NAME}.zip.sha256sum")
 
 echo "Image     download link is: https://s3-us-west-1.amazonaws.com/mozillagatewayimages/images/${GATEWAY_IMAGE_NAME}.zip"
