@@ -15,9 +15,7 @@ setvar() {
 
 echo "==================================================================================="
 setvar RPXC               './bin/rpxc'
-# Currently we're not caching enough stuff for the docker image to work properly, so leave
-# USE_CACHED_RPXC set to 0 until we figure out what all needs to be cached.
-setvar USE_CACHED_RPXC    0
+setvar USE_CACHED_RPXC    1
 setvar USE_CACHED_BASE    1
 setvar GATEWAY_REPO       https://github.com/mozilla-iot/gateway
 setvar GATEWAY_BRANCH     v0.4.0
@@ -26,4 +24,6 @@ setvar BASE_IMAGE_DIR     https://s3-us-west-1.amazonaws.com/mozillagatewayimage
 setvar BASE_IMAGE_NAME    gateway-0.4.0-base-desktop.img
 # The defaut image name is the base image name minus the -base portion
 setvar GATEWAY_IMAGE_NAME "${BASE_IMAGE_NAME/-base/}"
+setvar BUILDER_IMAGE      gateway-builder
+setvar DOCKER_CACHE       './docker/gateway-builder.tar.gz'
 echo "==================================================================================="

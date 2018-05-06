@@ -22,7 +22,11 @@ unzip -q ozw.zip
 mv open-zwave-$(basename ${OPENZWAVE_ZIP}) OpenZWave/open-zwave
 
 # Go build the gateway dependencies
-${RPXC} bash -c ./gateway/image/build-gateway.sh
+${RPXC} --image ${BUILDER_IMAGE} bash -c ./gateway/image/build-gateway.sh
+
+# Delete docker containers and images and node_modules
+docker system prune -f -a
+sudo rm -rf gateway/node_modules
 
 # Grab the base image, if needed
 
