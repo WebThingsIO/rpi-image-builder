@@ -5,6 +5,7 @@ cache:
   directories:
     - bin
     - base
+    - docker
 
 sudo: required
 
