@@ -9,6 +9,8 @@ usage() {
   echo "  --branch BRANCH     Branch or tag to retrieve from repository"
   echo "  --base BASE         Name of base image to use"
   echo "  --image IMAGE       Name of the final image file"
+  echo "  --brepo REPOSITORY  Repository to retrieve rpi-image-builder from"
+  echo "  --bbranch BRANCH    Branch or tag to retrieve rpi-image-builder from repository"
 }
 
 ENV=
@@ -21,6 +23,8 @@ addEnv() {
 }
 
 VERBOSE=0
+BREPO=mozilla-iot/rpi-image-builder
+BBRANCH=master
 
 while getopts "hv-:" opt "$@"; do
   case ${opt} in
@@ -43,6 +47,16 @@ while getopts "hv-:" opt "$@"; do
 
         repo)
           REPO="${!OPTIND}"
+          OPTIND=$(( $OPTIND + 1 ))
+          ;;
+
+        brepo)
+          BREPO="${!OPTIND}"
+          OPTIND=$(( $OPTIND + 1 ))
+          ;;
+
+        bbranch)
+          BBRANCH="${!OPTIND}"
           OPTIND=$(( $OPTIND + 1 ))
           ;;
 
@@ -74,6 +88,8 @@ if [ "${VERBOSE}" == 1 ]; then
   echo "BRANCH     = ${BRANCH}"
   echo "BASE       = ${BASE}"
   echo "IMAGE_NAME = ${IMAGE_NAME}"
+  echo "BREPO      = ${BREPO}"
+  echo "BBRANCH    = ${BBRANCH}"
 fi
 
 if [ -n "${REPO}" ]; then
@@ -125,7 +141,7 @@ done
 BODY='{
   "request": {
     "message": "Manually triggered build via api",
-    "branch": "master",
+    "branch": "'${BBRANCH}'",
     "config": {
       "env": {
         "global": {
@@ -142,4 +158,4 @@ curl -s -X POST \
    -H "Travis-API-Version: 3" \
    -H "Authorization: token ${TOKEN}" \
    -d "${BODY}" \
-   https://api.travis-ci.org/repo/mozilla-iot%2Frpi-image-builder/requests
+   https://api.travis-ci.org/repo/${BREPO/\//%2F}/requests
