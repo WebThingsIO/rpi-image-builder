@@ -28,7 +28,7 @@ deploy:
     secure: YQ8FlsTX51NpdQi/x2FDo89WVtEV+JQLPyXMB7IpKX4+vLUUDb7WbDoQ2KkoE08I8vs2UaOH89OHD2ngO4bVlODcSluLiLnIya8rK39Zaxi7gDE8ww0BcsucBro5uIn4DYf5GF5OMPmlq2b0A75oFsj/uiSMwVxWEY8noZ5kRqxdpAKWUIxHzffXl5vYZ46xlkmvVVHoyA65TrW13e3qg9SLDljnGtwZ3o1UM+4Y33usiZVTOigddnlDbu4dJfBINWI713Atk+B9MHq5ltf+bLrolr3jfU1j0s3A249McBeF+WGBPHQQjB62nRn6Y+I1NxlxSq6bfv1bcBB5L5j0c1ieX9NJNUoYFuTU6lslRpYgbhN2D8qlrGFDMxpEXnIAv4oB7mOeAl6Cxxi1dVsPyIKAbYjBBvHd1ouwuJwV2PUMulW8aqsaNmhAqvoFadNOqb9mGqSBseRqd1v7qdXLvopEtNBAG/6ZoJXv0kuWcltQzIRTh78iNnZta+W5+giKYJQVKJySTIyTS334a75a1WpzAiJ1HMfafNpKDloOOYYMB4JmZc2f/clPcyTLmcFFcmQDOBK8IUI3rE8usIj2rfEE5psVT1Xw6cJ6uqvk+WCYEIeeP8s+V3xkd+1AndjaxzbaapjUfKGBHn/Wwwx13FDqri2HySXSZVBrIiCvi2k=
   bucket: mozillagatewayimages
   region: us-west-1
-  local-dir: image
-  upload-dir: images
+  local-dir: tarfiles
+  upload-dir: tarfiles
   acl: public_read
   skip_cleanup: true
