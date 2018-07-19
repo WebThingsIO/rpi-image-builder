@@ -41,6 +41,7 @@ if [ ${USE_CACHED_BASE} == 1 ]; then
     fi
   fi
 else
+  rm -f "base/*"
   rm -f "base/${BASE_IMAGE_ZIP}"
   rm -f "base/${BASE_IMAGE_ZIP}.sha256sum"
 fi
@@ -51,7 +52,7 @@ fi
 (cd base; sha256sum --check "${BASE_IMAGE_ZIP}.sha256sum")
 
 # Merge in the gateway code
-./gateway/image/add-gateway.sh -o openzwave.tar.gz -g gateway.tar.gz "base/${BASE_IMAGE_ZIP}"
+./gateway/image/add-gateway.sh -v -r -o openzwave.tar.gz -g gateway.tar.gz "base/${BASE_IMAGE_ZIP}"
 mkdir -p image
 FINAL_IMAGE_NAME="base/${BASE_IMAGE_NAME}-final.img"
 mv "${FINAL_IMAGE_NAME}" "${GATEWAY_IMAGE_NAME}"

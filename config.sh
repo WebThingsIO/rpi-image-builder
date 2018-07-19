@@ -18,9 +18,9 @@ setvar RPXC               './bin/rpxc'
 # Currently we're not caching enough stuff for the docker image to work properly, so leave
 # USE_CACHED_RPXC set to 0 until we figure out what all needs to be cached.
 setvar USE_CACHED_RPXC    0
-setvar USE_CACHED_BASE    1
-setvar GATEWAY_REPO       https://github.com/mozilla-iot/gateway
-setvar GATEWAY_BRANCH     master
+setvar USE_CACHED_BASE    0
+setvar GATEWAY_REPO       https://github.com/dhylands/gateway
+setvar GATEWAY_BRANCH     remove-base-after-unzip
 setvar OPENZWAVE_ZIP      https://codeload.github.com/OpenZWave/open-zwave/zip/ab5fe966fee882bb9e8d78a91db892a60a1863d9
 setvar BASE_IMAGE_DIR     https://s3-us-west-1.amazonaws.com/mozillagatewayimages/base
 setvar BASE_IMAGE_NAME    gateway-0.5.0-pre1-base-2400.img
