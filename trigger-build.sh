@@ -7,8 +7,6 @@ usage() {
   echo "Usage: ${SCRIPT_NAME} [option]..."
   echo "  --repo REPOSITORY   Repository to retrieve gateway from"
   echo "  --branch BRANCH     Branch or tag to retrieve from repository"
-  echo "  --base BASE         Name of base image to use"
-  echo "  --image IMAGE       Name of the final image file"
 }
 
 ENV=
@@ -26,18 +24,18 @@ while getopts "hv-:" opt "$@"; do
   case ${opt} in
     -)
       case ${OPTARG} in
-        base)
-          BASE="${!OPTIND}"
-          OPTIND=$(( $OPTIND + 1 ))
-          ;;
-
         branch)
           BRANCH="${!OPTIND}"
           OPTIND=$(( $OPTIND + 1 ))
           ;;
 
-        image)
-          IMAGE_NAME="${!OPTIND}"
+        help)
+          usage
+          exit 1
+          ;;
+
+        prefix)
+          PREFIX="${!OPTIND}"
           OPTIND=$(( $OPTIND + 1 ))
           ;;
 
@@ -72,8 +70,11 @@ done
 if [ "${VERBOSE}" == 1 ]; then
   echo "REPO       = ${REPO}"
   echo "BRANCH     = ${BRANCH}"
-  echo "BASE       = ${BASE}"
-  echo "IMAGE_NAME = ${IMAGE_NAME}"
+  echo "PREFIX     = ${PREFIX}"
+fi
+
+if [ -n "${PREFIX}" ]; then
+  addEnv TAR_PREFIX "${PREFIX}"
 fi
 
 if [ -n "${REPO}" ]; then
@@ -85,17 +86,6 @@ if [ -z "${BRANCH}" ]; then
   exit 1
 else
   addEnv GATEWAY_BRANCH "${BRANCH}"
-fi
-
-if [ -z "${BASE}" ]; then
-  echo "Must specify a base image name to use (using --base)"
-  exit 1
-else
-  addEnv BASE_IMAGE_NAME "${BASE}"
-fi
-
-if [ -n "${IMAGE_NAME}" ]; then
-  addEnv GATEWAY_IMAGE_NAME "${IMAGE_NAME}"
 fi
 
 if [ "${VERBOSE}" == 1 ]; then
