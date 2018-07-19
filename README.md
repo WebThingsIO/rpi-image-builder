@@ -1,4 +1,4 @@
-# Raspberry Pi sdcard image builder
+# Build files needed to create a Raspberry Pi sdcard image
 
 [![Build Status](https://travis-ci.org/mozilla-iot/rpi-image-builder.svg?branch=master)](https://travis-ci.org/mozilla-iot/rpi-image-builder)
 
@@ -29,21 +29,59 @@ The --branch specifies the branch name or tag name used to
 checkou the gateway code from the git repository. This option
 is required.
 
-## --base BASE
+## --prefix BASE
 
-The --base specifies the name of the base image to retrieve
-from AWS. This option is required. You can see available base
-images using a command like:
+The --prefix specifies the prefix to prepend to the openzwave.tar.gz
+and gateway.tar.gz files which are generated.
+
+# Overal process to create an sdcard
+
+## Build a base image
+
+Follow [these steps](https://github.com/mozilla-iot/wiki/wiki/Creating-the-base-image-file-for-the-Raspberry-Pi) on the wiki to create a base image.
+
+## Build the gateway
+
+Use the trigger.sh script (mentioned above) to build the
+openzwave.tar.gz and gateway.tar.gz files.
+
+This will put these files (with the assigned prefix) onto AWS in a
+directory called tarfiles. You can use this command:
 ```
-aws s3 ls s3://mozillagatewayimages/base/
+aws s3 ls s3://mozillagatewayimages/tarfiles/
+```
+to see the generated files.
+
+## Download the tarfiles
+
+You can either use aws commands:
+```
+aws s3 cp s3://mozillagatewayimages/tarfiles/PREFIX-openzwave.tar.gz .
+aws s3 cp s3://mozillagatewayimages/tarfiles/PREFIX-gateway.tar.gz .
+```
+or you can use URLs like these:
+```
+https://s3-us-west-1.amazonaws.com/mozillagatewayimages/tarfiles/PREFIX-openzwave.tar.gz
+https://s3-us-west-1.amazonaws.com/mozillagatewayimages/tarfiles/PREFIX-gateway.tar.gz
 ```
 
-## --image IMAGE_NAME
+## Add the tarfiles to the base image
 
-The --image specifies the name of the final generated image.
-If this option is not provided, then the name of the base
-image minus the -base portion will be used. Final images can
-be found using:
+Run the [add-gateway.sh](https://github.com/mozilla-iot/gateway/blob/master/image/add-gateway.sh) script found in the images directory of the [gateway repository](https://github.com/mozilla-iot/gateway)
+
 ```
-aws s3 ls s3://mozillagatewayimages/
+./add-gateway.sh -o -o PREFIX-openzwave.tar.gz -g PREFIX-gateway.tar.gz gateway-VERSION.img
+```
+
+## Copy the image to AWS
+
+Use the [image-to-aws.sh](https://github.com/mozilla-iot/gateway/blob/master/image/image-to-aws.sh) script found in the images directory of the [gateway repository](https://github.com/mozilla-iot/gateway)
+```
+./image-to-aws.sh gateway-VERSION.img
+```
+
+You can then access the image using a URL like this:
+```
+https://s3-us-west-1.amazonaws.com/mozillagatewayimages/images/gateway-VERSION.img.zip
+https://s3-us-west-1.amazonaws.com/mozillagatewayimages/images/gateway-VERSION.img.zip.sha256sum
 ```
