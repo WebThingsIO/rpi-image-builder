@@ -70,8 +70,10 @@ https://s3-us-west-1.amazonaws.com/mozillagatewayimages/tarfiles/PREFIX-gateway.
 Run the [add-gateway.sh](https://github.com/mozilla-iot/gateway/blob/master/image/add-gateway.sh) script found in the images directory of the [gateway repository](https://github.com/mozilla-iot/gateway)
 
 ```
-./add-gateway.sh -o -o PREFIX-openzwave.tar.gz -g PREFIX-gateway.tar.gz gateway-VERSION.img
+./add-gateway.sh -o PREFIX-openzwave.tar.gz -g PREFIX-gateway.tar.gz gateway-VERSION.img BASE-IMAGE-NAME
 ```
+The output image file will have the same name as the base image with '-base'
+removed.
 
 ## Copy the image to AWS
 
