@@ -7,6 +7,8 @@ usage() {
   echo "Usage: ${SCRIPT_NAME} [option]..."
   echo "  --repo REPOSITORY   Repository to retrieve gateway from"
   echo "  --branch BRANCH     Branch or tag to retrieve from repository"
+  echo "  --prefix PREFIX     Specify prefix to use on generate tarballs"
+  echo "  --help              Display this help message"
 }
 
 ENV=
