@@ -46,6 +46,11 @@ while getopts "hv-:" opt "$@"; do
           OPTIND=$(( $OPTIND + 1 ))
           ;;
 
+        ozw)
+          OZW="${!OPTIND}"
+          OPTIND=$(( $OPTIND + 1 ))
+          ;;
+
         *)
           echo "Unrecognized option: ${OPTARG}"
           exit 1
@@ -73,6 +78,7 @@ if [ "${VERBOSE}" == 1 ]; then
   echo "REPO       = ${REPO}"
   echo "BRANCH     = ${BRANCH}"
   echo "PREFIX     = ${PREFIX}"
+  echo "OZW        = ${OZW}"
 fi
 
 if [ -n "${PREFIX}" ]; then
@@ -88,6 +94,10 @@ if [ -z "${BRANCH}" ]; then
   exit 1
 else
   addEnv GATEWAY_BRANCH "${BRANCH}"
+fi
+
+if [ -n "${OZW}" ]; then
+  addEnv OPENZWAVE_ZIP "${OZW}"
 fi
 
 if [ "${VERBOSE}" == 1 ]; then
