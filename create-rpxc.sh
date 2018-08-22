@@ -10,15 +10,6 @@ if [ ${USE_CACHED_RPXC} == 1 -a -f ${RPXC} ]; then
   echo "Using cached version of rpxc"
 else
   echo "Creating rpxc"
-  set -x
-  docker run sdthirlwall/raspberry-pi-cross-compiler > ${RPXC}
+  docker run dhylands/raspberry-pi-cross-compiler-stretch > ${RPXC}
   chmod +x ${RPXC}
-
-  sudo ${RPXC} apt update
-  sudo ${RPXC} apt upgrade
-
-  ${RPXC} install-raspbian libudev-dev
-  ${RPXC} install-debian pkg-config
-  ${RPXC} install-debian python
-  ${RPXC} install-debian python2.7
 fi
