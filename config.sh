@@ -19,7 +19,7 @@ setvar RPXC               './bin/rpxc'
 # USE_CACHED_RPXC set to 0 until we figure out what all needs to be cached.
 setvar USE_CACHED_RPXC    0
 setvar GATEWAY_REPO       https://github.com/mozilla-iot/gateway
-setvar GATEWAY_BRANCH     master
-setvar OPENZWAVE_ZIP      https://github.com/dhylands/open-zwave/archive/openwrt-crash2.zip
+setvar GATEWAY_BRANCH     openwrt-crash
+setvar OPENZWAVE_ZIP      https://s3-us-west-1.amazonaws.com/mozillagatewayimages/tarfiles/openzwave-1.4.164-patched.tar.gz
 setvar TAR_PREFIX         OZW
 echo "==================================================================================="

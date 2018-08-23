@@ -15,14 +15,15 @@ git clone --depth 1 --branch ${GATEWAY_BRANCH} ${GATEWAY_REPO}
 mkdir -p OpenZWave
 rm -rf OpenZWave/open-zwave
 
-rm -rf master.zip open-zwave-*
-wget -O ozw.zip ${OPENZWAVE_ZIP}
+rm -rf master.zip openzwave-*
+wget -O ozw.tgz ${OPENZWAVE_ZIP}
 
-unzip -q ozw.zip
-mv open-zwave-* OpenZWave/open-zwave
+#unzip -q ozw.zip
+tar xf ozw.tgz
+mv openzwave-* OpenZWave/open-zwave
 
 # Go build the gateway dependencies
-${RPXC} bash -c ./gateway/image/build-gateway.sh
+${RPXC} bash -c './gateway/image/build-gateway.sh; find /usr -name "*zwave*" -ls'
 
 ## Grab the base image, if needed
 #
