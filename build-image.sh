@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-. ./config.sh
+. ./config.sh > build-info.txt
 
 echo "Cloning branch ${GATEWAY_BRANCH} of ${GATEWAY_REPO}"
 
@@ -10,6 +10,12 @@ set -x
 # Do a shallow clone of the gateway repository.
 rm -rf $(basename ${GATEWAY_REPO})
 git clone --depth 1 --branch ${GATEWAY_BRANCH} ${GATEWAY_REPO}
+( cd $(basename ${GATEWAY_REPO}); \
+  cp ../build-info.txt .; \
+  echo "COMMIT: $(git rev-parse HEAD)" >> build-info.txt; \
+  cat build-info.txt; \
+  rm -rf .git \
+)
 
 # Grab the latest open-zwave and unpack it
 mkdir -p OpenZWave
