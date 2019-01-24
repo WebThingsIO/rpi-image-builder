@@ -28,7 +28,7 @@ unzip -q ozw.zip
 mv open-zwave-$(basename ${OPENZWAVE_ZIP}) OpenZWave/open-zwave
 
 # Go build the gateway dependencies
-${RPXC} bash -c ./gateway/image/build-gateway.sh
+${RPXC} bash -c  "export DEV_BUILD=${DEV_BUILD}; ./gateway/image/build-gateway.sh"
 
 ## Grab the base image, if needed
 #
