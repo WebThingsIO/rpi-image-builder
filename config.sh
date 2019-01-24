@@ -9,6 +9,7 @@ setvar() {
 
   if [ -z "${!name}" ]; then
     eval ${name}=${value}
+    export ${name}
   fi
   echo "CONFIG: ${name} = ${!name}"
 }
