@@ -8,6 +8,7 @@ usage() {
   echo "  --repo REPOSITORY   Repository to retrieve gateway from"
   echo "  --branch BRANCH     Branch or tag to retrieve from repository"
   echo "  --prefix PREFIX     Specify prefix to use on generate tarballs"
+  echo "  --dev               Do a development build (rather than production)"
   echo "  --help              Display this help message"
 }
 
@@ -21,6 +22,7 @@ addEnv() {
 }
 
 VERBOSE=0
+DEV_BUILD=0
 
 while getopts "hv-:" opt "$@"; do
   case ${opt} in
@@ -34,6 +36,10 @@ while getopts "hv-:" opt "$@"; do
         help)
           usage
           exit 1
+          ;;
+
+        dev)
+          DEV_BUILD=1
           ;;
 
         prefix)
@@ -73,6 +79,7 @@ if [ "${VERBOSE}" == 1 ]; then
   echo "REPO       = ${REPO}"
   echo "BRANCH     = ${BRANCH}"
   echo "PREFIX     = ${PREFIX}"
+  echo "DEV_BUILD  = ${DEV_BUILD}"
 fi
 
 if [ -n "${PREFIX}" ]; then
@@ -81,6 +88,10 @@ fi
 
 if [ -n "${REPO}" ]; then
   addEnv GATEWAY_REPO "${REPO}"
+fi
+
+if [ -n "${DEV_BUILD}" ]; then
+  addEnv DEV_BUILD "${DEV_BUILD}"
 fi
 
 if [ -z "${BRANCH}" ]; then
