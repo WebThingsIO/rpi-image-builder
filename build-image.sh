@@ -17,16 +17,6 @@ git clone --depth 1 --branch ${GATEWAY_BRANCH} ${GATEWAY_REPO}
   rm -rf .git \
 )
 
-# Grab the latest open-zwave and unpack it
-mkdir -p OpenZWave
-rm -rf OpenZWave/open-zwave
-
-rm -rf master.zip open-zwave-master
-wget -O ozw.zip ${OPENZWAVE_ZIP}
-
-unzip -q ozw.zip
-mv open-zwave-$(basename ${OPENZWAVE_ZIP}) OpenZWave/open-zwave
-
 # Go build the gateway dependencies
 ${RPXC} bash -c  "export DEV_BUILD=${DEV_BUILD}; ./gateway/image/build-gateway.sh"
 
@@ -58,11 +48,10 @@ ${RPXC} bash -c  "export DEV_BUILD=${DEV_BUILD}; ./gateway/image/build-gateway.s
 #(cd base; sha256sum --check "${BASE_IMAGE_ZIP}.sha256sum")
 
 mkdir -p tarfiles
-mv openzwave.tar.gz tarfiles/${TAR_PREFIX}-openzwave.tar.gz
 mv gateway.tar.gz   tarfiles/${TAR_PREFIX}-gateway.tar.gz
 
 # Merge in the gateway code
-#./gateway/image/add-gateway.sh -v -r -o openzwave.tar.gz -g gateway.tar.gz "base/${BASE_IMAGE_ZIP}"
+#./gateway/image/add-gateway.sh -v -r -g gateway.tar.gz "base/${BASE_IMAGE_ZIP}"
 #mkdir -p image
 #FINAL_IMAGE_NAME="base/${BASE_IMAGE_NAME}-final.img"
 #mv "${FINAL_IMAGE_NAME}" "${GATEWAY_IMAGE_NAME}"
@@ -74,5 +63,4 @@ mv gateway.tar.gz   tarfiles/${TAR_PREFIX}-gateway.tar.gz
 #echo "sha256sum download link is: https://s3-us-west-1.amazonaws.com/mozillagatewayimages/images/${GATEWAY_IMAGE_NAME}.zip.sha256sum"
 
 echo "Tarfile download links:"
-echo "https://s3-us-west-1.amazonaws.com/mozillagatewayimages/tarfiles/${TAR_PREFIX}-openzwave.tar.gz"
 echo "https://s3-us-west-1.amazonaws.com/mozillagatewayimages/tarfiles/${TAR_PREFIX}-gateway.tar.gz"
