@@ -21,7 +21,6 @@ setvar RPXC               './bin/rpxc'
 setvar USE_CACHED_RPXC    0
 setvar GATEWAY_REPO       https://github.com/mozilla-iot/gateway
 setvar GATEWAY_BRANCH     master
-setvar OPENZWAVE_ZIP      https://codeload.github.com/OpenZWave/open-zwave/zip/ab5fe966fee882bb9e8d78a91db892a60a1863d9
 setvar TAR_PREFIX         ${GATEWAY_BRANCH}
 setvar DEV_BUILD          0
 echo "==================================================================================="

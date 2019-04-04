@@ -31,8 +31,8 @@ is required.
 
 ## --prefix BASE
 
-The --prefix specifies the prefix to prepend to the openzwave.tar.gz
-and gateway.tar.gz files which are generated.
+The --prefix specifies the prefix to prepend to the
+gateway.tar.gz file which is generated.
 
 # Overal process to create an sdcard
 
@@ -43,7 +43,7 @@ Follow [these steps](https://github.com/mozilla-iot/wiki/wiki/Creating-the-base-
 ## Build the gateway
 
 Use the trigger.sh script (mentioned above) to build the
-openzwave.tar.gz and gateway.tar.gz files.
+gateway.tar.gz file.
 
 This will put these files (with the assigned prefix) onto AWS in a
 directory called tarfiles. You can use this command:
@@ -56,12 +56,10 @@ to see the generated files.
 
 You can either use aws commands:
 ```
-aws s3 cp s3://mozillagatewayimages/tarfiles/PREFIX-openzwave.tar.gz .
 aws s3 cp s3://mozillagatewayimages/tarfiles/PREFIX-gateway.tar.gz .
 ```
 or you can use URLs like these:
 ```
-https://s3-us-west-1.amazonaws.com/mozillagatewayimages/tarfiles/PREFIX-openzwave.tar.gz
 https://s3-us-west-1.amazonaws.com/mozillagatewayimages/tarfiles/PREFIX-gateway.tar.gz
 ```
 
@@ -70,7 +68,7 @@ https://s3-us-west-1.amazonaws.com/mozillagatewayimages/tarfiles/PREFIX-gateway.
 Run the [add-gateway.sh](https://github.com/mozilla-iot/gateway/blob/master/image/add-gateway.sh) script found in the images directory of the [gateway repository](https://github.com/mozilla-iot/gateway)
 
 ```
-./add-gateway.sh -o PREFIX-openzwave.tar.gz -g PREFIX-gateway.tar.gz gateway-VERSION.img BASE-IMAGE-NAME
+./add-gateway.sh -g PREFIX-gateway.tar.gz gateway-VERSION.img BASE-IMAGE-NAME
 ```
 The output image file will have the same name as the base image with '-base'
 removed.
