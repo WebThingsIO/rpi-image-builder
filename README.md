@@ -34,16 +34,47 @@ is required.
 The --prefix specifies the prefix to prepend to the
 gateway.tar.gz file which is generated.
 
-# Overal process to create an sdcard
+# Overall process to create an sdcard
 
 ## Build a base image
 
 Follow [these steps](https://github.com/mozilla-iot/wiki/wiki/Creating-the-base-image-file-for-the-Raspberry-Pi) on the wiki to create a base image.
 
+## Install rpi-image-builder dependencies
+* Download/clone rpi-image-builder
+
+`$ git clone https://github.com/benfrancis/rpi-image-builder.git`
+
+* [Install ruby](https://www.ruby-lang.org/en/documentation/installation/) if not already installed, e.g. on Ubuntu:
+
+`$ sudo apt install ruby-full`
+
+* [Install the Travis command line client](https://github.com/travis-ci/travis.rb)
+
+`$ gem install travis -v 1.8.10 --no-rdoc --no-ri`
+
+* Log in to Travis
+
+`$ travis login` (enter GitHub credentials)
+
+* [Install AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html), e.g. on Ubuntu:
+
+`$ sudo apt install awscli`
+
+* Configure your AWS access credentials (You will need an Access Key ID and Secret Access Key generated from your AWS account, with permissions granted by Mozilla)
+
+`$ aws configure`
+
+* Install kpartx , e.g. on Ubuntu:
+
+`$ sudo apt install kpartx`
+
 ## Build the gateway
 
-Use the trigger.sh script (mentioned above) to build the
-gateway.tar.gz file.
+Use the trigger.sh script (documented above) to build the
+gateway.tar.gz file, e.g. from the rpi-image-builder directory:
+
+`$ ./trigger-build.sh --branch master --prefix 0.10.0-pre1
 
 This will put these files (with the assigned prefix) onto AWS in a
 directory called tarfiles. You can use this command:
