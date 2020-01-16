@@ -1,0 +1,23 @@
+name: Build image
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Install dependencies
+      run: |
+        sudo apt -qq update
+        sudo apt install -y kpartx
+        ./create-rpxc.sh
+    - name: Build image
+      run: |
+        ./build-image.sh

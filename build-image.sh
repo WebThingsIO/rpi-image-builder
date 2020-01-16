@@ -18,7 +18,7 @@ git clone --depth 1 --branch ${GATEWAY_BRANCH} ${GATEWAY_REPO}
 )
 
 # Go build the gateway dependencies
-${RPXC} bash -c  "export DEV_BUILD=${DEV_BUILD}; ./gateway/image/build-gateway.sh"
+${RPXC} bash -c "export DEV_BUILD=${DEV_BUILD}; ./gateway/image/build-gateway.sh"
 
 ## Grab the base image, if needed
 #
@@ -48,7 +48,7 @@ ${RPXC} bash -c  "export DEV_BUILD=${DEV_BUILD}; ./gateway/image/build-gateway.s
 #(cd base; sha256sum --check "${BASE_IMAGE_ZIP}.sha256sum")
 
 mkdir -p tarfiles
-mv gateway.tar.gz   tarfiles/${TAR_PREFIX}-gateway.tar.gz
+mv gateway.tar.gz tarfiles/${TAR_PREFIX}-gateway.tar.gz
 
 # Merge in the gateway code
 #./gateway/image/add-gateway.sh -v -r -g gateway.tar.gz "base/${BASE_IMAGE_ZIP}"
