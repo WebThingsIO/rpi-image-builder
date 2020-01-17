@@ -1,0 +1,44 @@
+name: Build and upload image
+
+on:
+  repository_dispatch:
+    types: build-image
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Install dependencies
+      run: |
+        sudo apt -qq update
+        sudo apt install -y kpartx
+        ./create-rpxc.sh
+        pip install awscli
+    - name: Build image
+      env:
+        GATEWAY_REPO: ${{ github.event.client_payload.gateway_repo }}
+        GATEWAY_BRANCH: ${{ github.event.client_payload.gateway_branch }}
+        TAR_PREFIX: ${{ github.event.client_payload.tar_prefix }}
+        DEV_BUILD: ${{ github.event.client_payload.dev_build }}
+      run: |
+        ./build-image.sh
+    - name: Upload to S3
+      env:
+        AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_REGION: 'us-west-1'
+        SOURCE_DIR: 'tarfiles'
+        DEST_DIR: 'tarfiles'
+      run: |
+        aws configure --profile s3-sync-action <<-EOF > /dev/null 2>&1
+        ${AWS_ACCESS_KEY_ID}
+        ${AWS_SECRET_ACCESS_KEY}
+        ${AWS_REGION}
+        text
+        EOF
+        aws s3 sync ${SOURCE_DIR} s3://${AWS_S3_BUCKET}/${DEST_DIR} \
+              --profile s3-sync-action \
+              --no-progress \
+              --acl public-read

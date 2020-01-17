@@ -1,20 +1,23 @@
 # Build files needed to create a Raspberry Pi sdcard image
 
-[![Build Status](https://travis-ci.org/mozilla-iot/rpi-image-builder.svg?branch=master)](https://travis-ci.org/mozilla-iot/rpi-image-builder)
-
 Raspberry Pi SDCard image build for the Web of Things gateway.
 
-Use the trigger-build.sh script to initiate a build. Modifying
+Use the trigger-build.py script to initiate a build. Modifying
 any of the files in this repository and pushing them will also
 trigger a build using the defaults specified in config.sh
 
-# trigger-build.sh
+# trigger-buildpy.
 
-The trigger-build.sh will trigger a travis job to start
+The trigger-build.py will trigger a GitHub workflow to start
 building an image. You can check the progress by watching
-https://travis-ci.org/mozilla-iot/rpi-image-builder
+https://github.com/mozilla-iot/rpi-image-builder/actions
 
-The trigger-build.sh script takes the following arguments:
+The trigger-build.py script takes the following arguments:
+
+## --token TOKEN
+
+The --token option specifies the GitHub API token, which can
+be generated here: https://github.com/settings/tokens
 
 ## --repo REPO
 
@@ -45,25 +48,9 @@ Follow [these steps](https://github.com/mozilla-iot/wiki/wiki/Creating-the-base-
 
 `$ git clone https://github.com/benfrancis/rpi-image-builder.git`
 
-* [Install ruby](https://www.ruby-lang.org/en/documentation/installation/) if not already installed, e.g. on Ubuntu:
+* Install the Python requests library
 
-`$ sudo apt install ruby-full`
-
-* [Install the Travis command line client](https://github.com/travis-ci/travis.rb)
-
-`$ gem install travis -v 1.8.10 --no-rdoc --no-ri`
-
-* Log in to Travis
-
-`$ travis login` (enter GitHub credentials)
-
-* [Install AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html), e.g. on Ubuntu:
-
-`$ sudo apt install awscli`
-
-* Configure your AWS access credentials (You will need an Access Key ID and Secret Access Key generated from your AWS account, with permissions granted by Mozilla)
-
-`$ aws configure`
+`$ pip3 install requests`
 
 * Install kpartx , e.g. on Ubuntu:
 
@@ -71,10 +58,10 @@ Follow [these steps](https://github.com/mozilla-iot/wiki/wiki/Creating-the-base-
 
 ## Build the gateway
 
-Use the trigger.sh script (documented above) to build the
+Use the trigger-build.py script (documented above) to build the
 gateway.tar.gz file, e.g. from the rpi-image-builder directory:
 
-`$ ./trigger-build.sh --branch master --prefix 0.10.0-pre1
+`$ ./trigger-build.py --token <token> --branch master --prefix 0.10.0-pre1
 
 This will put these files (with the assigned prefix) onto AWS in a
 directory called tarfiles. You can use this command:
