@@ -1,6 +1,6 @@
 # Build files needed to create a Raspberry Pi SD card image
 
-Raspberry Pi SDCard image build for the Web of Things gateway.
+Raspberry Pi SD card image build for the Web of Things gateway.
 
 Use the `trigger-build.py` script to initiate a build. Modifying
 any of the files in this repository and pushing them will also
