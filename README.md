@@ -37,7 +37,7 @@ is required.
 The `--prefix` specifies the prefix to prepend to the
 `gateway.tar.gz` file which is generated.
 
-# Overall process to create an SD card
+# Overall process to create an SD card image
 
 ## Build a base image
 
