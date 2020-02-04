@@ -1,4 +1,4 @@
-# Build files needed to create a Raspberry Pi sdcard image
+# Build files needed to create a Raspberry Pi SD card image
 
 Raspberry Pi SDCard image build for the Web of Things gateway.
 
