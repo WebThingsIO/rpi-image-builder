@@ -12,9 +12,10 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt -qq update
-        sudo apt install -y kpartx
+        sudo apt install -y kpartx libpixman-1-dev
         ./create-rpxc.sh
-        pip install awscli
+        python -m pip install --upgrade pip
+        python -m pip install awscli
     - name: Build image
       env:
         GATEWAY_REPO: ${{ github.event.client_payload.gateway_repo }}
