@@ -16,7 +16,7 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt -qq update
-        sudo apt install -y kpartx libpixman-1-dev
+        sudo apt install -y kpartx
         ./create-rpxc.sh
     - name: Build image
       run: |
