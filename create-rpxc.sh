@@ -11,7 +11,6 @@ if [ ${USE_CACHED_RPXC} == 1 -a -f ${RPXC} ]; then
   echo "Using cached version of rpxc"
 else
   echo "Creating rpxc"
-  docker run -t dhylands/raspberry-pi-cross-compiler-stretch | tr -d $'\r' > ${RPXC}
-  sed -i 's/docker run -i -t/docker run -t/' ${RPXC}
+  docker run -t mozillaiot/raspberry-pi-cross-compiler-stretch | tr -d $'\r' > ${RPXC}
   chmod +x ${RPXC}
 fi
