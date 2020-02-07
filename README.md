@@ -48,7 +48,7 @@ on the wiki to create a base image.
 * Download/clone rpi-image-builder
 
 ```
-$ git clone https://github.com/benfrancis/rpi-image-builder.git
+$ git clone https://github.com/mozilla-iot/rpi-image-builder.git
 ```
 
 * Install the Python requests library
