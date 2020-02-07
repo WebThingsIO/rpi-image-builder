@@ -48,13 +48,13 @@ on the wiki to create a base image.
 * Download/clone rpi-image-builder
 
 ```
-$ git clone https://github.com/mozilla-iot/rpi-image-builder.git
+git clone https://github.com/mozilla-iot/rpi-image-builder.git
 ```
 
 * Install the Python requests library
 
 ```
-$ pip3 install requests
+pip3 install requests
 ```
 
 ## Build the gateway
@@ -63,7 +63,7 @@ Use the `trigger-build.py` script (documented above) to build the
 `gateway.tar.gz` file, e.g. from the rpi-image-builder directory:
 
 ```
-$ ./trigger-build.py --token <token> --branch master --prefix 0.10.0-pre1
+./trigger-build.py --token <token> --branch master --prefix 0.10.0-pre1
 ```
 
 This will put these files (with the assigned prefix) onto AWS in a
